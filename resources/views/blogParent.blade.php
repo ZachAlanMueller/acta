@@ -77,7 +77,7 @@
   <body>
   <div id="fh5co-page">
     <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-    <aside id="fh5co-aside" role="complementary" class="border js-fullheight">
+    <aside id="fh5co-aside" role="complementary" class="border js-fullheight" style="overflow-y: hidden;">
 
       <h1 id="fh5co-logo"><a href="/">Blog</a></h1>
       <nav id="fh5co-main-menu" role="navigation">
