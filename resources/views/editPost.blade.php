@@ -20,7 +20,7 @@
           </div>
         </div>
       </div>
-      <input id='submit-button' type="submit" class="btn btn-primary btn-md animate-box" data-animate-effect="fadeInLeft">
+      <input id='submit-button' type="submit" class="btn btn-primary btn-md">
       <form id='post-form' action="/post/edit/{{$id}}" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" id='input-title' name="title">

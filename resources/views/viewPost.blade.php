@@ -7,16 +7,14 @@
           <div class="col-md-8">
             <div id="title">
               {!! $post->title !!}
-
             </div>
-            <br>
             <div id="content">
               {!!$post->content!!}
             </div>
-
-            <div class="pull-right" id="author">
+            <hr>
+            <h5 class="pull-right" id="author">
               Posted by {{$post->name}} on {{date('F jS, Y', strtotime($post->created_at))}}
-            </div>
+            </h5>
           </div>
         </div>
       </div>
