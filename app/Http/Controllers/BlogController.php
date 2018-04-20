@@ -13,7 +13,11 @@ class BlogController extends Controller
 	}
 
 	public function posts(){
-		$posts = DB::table('posts')->join('users', 'users.id', '=', 'posts.author_id')->orderBy('posts.created_at', 'desc')->limit(10)->get();
+        $user_id = 0;
+        if(Auth::check()){
+            $user_id = Auth::user()->id;
+        }
+		$posts = DB::table('posts')->join('users', 'users.id', '=', 'posts.author_id')->select('posts.id as id', 'status', 'title', 'content', 'author_id', 'posts.created_at as created_at', 'posts.updated_at as updated_at', 'name')->whereRaw('status = 1 OR (status = 3 and author_id = '.$user_id.")")->orderBy('posts.created_at', 'desc')->limit(10)->get();
 		return view('posts')->with(['posts' => $posts]);
 	}
 
@@ -46,8 +50,12 @@ class BlogController extends Controller
     		str_replace('>', '&gt;', $request['content']);
     		str_replace('<', '&lt;', $request['title']);
     		str_replace('>', '&gt;', $request['title']);
-    		$dbIns = [ 'status' => 1, 'title' => $request['title'], 'content' => $request['content'], 'author_id' => Auth::user()->id, 'created_at' => now(), 'updated_at' => now()];
+
+    		$dbIns = [ 'status' => $request['status'], 'title' => $request['title'], 'content' => $request['content'], 'author_id' => Auth::user()->id, 'created_at' => now(), 'updated_at' => now()];
     		DB::table('posts')->insert($dbIns);
+                        if($request['status'] == 3){
+                return redirect('/')->with('notification', "Successfully saved draft.");
+            }
     		return redirect('/')->with('notification', "Successfully created a new post!");
     	}
     	else{
@@ -74,8 +82,11 @@ class BlogController extends Controller
     		str_replace('>', '&gt;', $request['content']);
     		str_replace('<', '&lt;', $request['title']);
     		str_replace('>', '&gt;', $request['title']);
-    		$dbUpdate = [ 'status' => 1, 'title' => $request['title'], 'content' => $request['content'], 'author_id' => Auth::user()->id, 'updated_at' => now()];
+    		$dbUpdate = [ 'status' => $request['status'], 'title' => $request['title'], 'content' => $request['content'], 'author_id' => Auth::user()->id, 'updated_at' => now()];
     		DB::table('posts')->where('id', $id)->update($dbUpdate);
+            if($request['status'] == 3){
+                return redirect('/')->with('notification', "Successfully saved draft.");
+            }
     		return redirect('/')->with('notification', "Successfully updated a post!");
     	}
     	else{

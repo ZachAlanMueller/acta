@@ -21,10 +21,12 @@
         </div>
       </div>
       <input id='submit-button' type="submit" class="btn btn-primary btn-md animate-box" data-animate-effect="fadeInLeft">
+      <input id='submit-draft-button' type="submit" class="btn btn-info btn-md animate-box pull-right" data-animate-effect="fadeInLeft">
       <form id='post-form' action="/post/create" method="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" id='input-title' name="title">
         <input type="hidden" id='input-content' name="content">
+        <input type="hidden" id='input-status' name="status">
       </form>
 
 
@@ -32,6 +34,8 @@
 
 @section('javascript')
   <script>
+    $('#input-status').val(1);
+    $('#submit-draft-button').val('Save as Draft');
     var title = new Quill('#title', {
       modules: { toolbar: false },
       theme: 'snow'
@@ -77,5 +81,12 @@
     $('#submit-button').on('click', function(){
       $('#post-form').trigger('submit');
     });
+
+    $('#submit-draft-button').on('click', function(){
+      $('#input-status').val('3');
+      $('#post-form').trigger('submit');
+    });
+
+
   </script>
 @endsection

@@ -145,7 +145,7 @@
       if(pathname == '/'){
         //do nothing, correct by default
       }
-      else if (pathname == '/posts'){
+      else if (pathname.startsWith('/post')){
         $('#selector-home').removeClass('fh5co-active');
         $('#selector-posts').addClass('fh5co-active');
       }
