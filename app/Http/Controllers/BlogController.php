@@ -82,7 +82,7 @@ class BlogController extends Controller
     		str_replace('>', '&gt;', $request['content']);
     		str_replace('<', '&lt;', $request['title']);
     		str_replace('>', '&gt;', $request['title']);
-    		$dbUpdate = [ 'status' => $request['status'], 'title' => $request['title'], 'content' => $request['content'], 'author_id' => Auth::user()->id, 'updated_at' => now()];
+    		$dbUpdate = [ 'status' => $request['status'], 'title' => $request['title'], 'content' => $request['content'], 'author_id' => Auth::user()->id, 'updated_at' => now(), 'tag_id' => $request['tag_id']];
     		DB::table('posts')->where('id', $id)->update($dbUpdate);
             if($request['status'] == 3){
                 return redirect('/')->with('notification', "Successfully saved draft.");

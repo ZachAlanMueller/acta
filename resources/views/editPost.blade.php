@@ -32,6 +32,7 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" id='input-title' name="title">
         <input type="hidden" id='input-content' name="content">
+        <input type="hidden" id='input-tags' name="tag_id" value='{{$post->tag_id}}'>
         <input type="hidden" id='input-status' name="status">
 
       </form>
@@ -83,6 +84,9 @@
     $('#title').children('.ql-editor').on('DOMSubtreeModified', function(){
       $('#input-title').val($('#title').children('.ql-editor').html());
     });
+    $('#tags').change(function(){
+      $('#input-tags').val($('#tags').val());
+    });
 
     
 
@@ -111,6 +115,7 @@
           for(i = 0; i < data['info'].length; i++){
             $('#tags').append('<option value="'+data['info'][i]['id']+'">'+data['info'][i]['label']+'</option>');
           }
+          $('#tags').val({{$post->tag_id}});
         },
         error:function (xhr, options, err){
           console.log(xhr);
