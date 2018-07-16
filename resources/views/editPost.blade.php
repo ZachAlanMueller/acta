@@ -18,6 +18,12 @@
           <div id="editor">
             {!!$post->content!!}
           </div>
+
+          <div class="form-group animate-box" data-animate-effect='fadeInLeft'>
+          <select class="form-control" id="tags" style="margin-top:5px; width:inherit; display:inline-block; font-size:80%; height:80%;">
+          </select>
+          
+        </div>
         </div>
       </div>
       <input id='submit-button' type="submit" class="btn btn-primary btn-md">
@@ -90,6 +96,31 @@
     $('#submit-draft-button').on('click', function(){
       $('#input-status').val('3');
       $('#post-form').trigger('submit');
+    });
+
+
+    function getTags(){
+      $.ajax({
+        type:'GET',
+        url:'/ajax/getTags',
+        data:'_token = <?php echo csrf_token() ?>',
+        success:function(data){
+          console.log(data);
+          console.log(data['info'].length);
+          $('#tags').empty();
+          for(i = 0; i < data['info'].length; i++){
+            $('#tags').append('<option value="'+data['info'][i]['id']+'">'+data['info'][i]['label']+'</option>');
+          }
+        },
+        error:function (xhr, options, err){
+          console.log(xhr);
+        }
+      });
+    }
+
+    
+    $(document).ready(function(){
+      getTags();
     });
   </script>
 @endsection
