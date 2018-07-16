@@ -19,6 +19,7 @@ Route::get('/post/{id}', 'BlogController@viewPost');
 Route::get('/post/edit/{id}', 'BlogController@editPost');
 Route::post('/post/edit/{id}', 'BlogController@updatePost');
 Route::get('/posts', 'BlogController@posts');
+Route::get('/ajax/getTags', 'AjaxController@getTags');
 
 Auth::routes();
 

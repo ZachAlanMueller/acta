@@ -51,7 +51,7 @@ class BlogController extends Controller
     		str_replace('<', '&lt;', $request['title']);
     		str_replace('>', '&gt;', $request['title']);
 
-    		$dbIns = [ 'status' => $request['status'], 'title' => $request['title'], 'content' => $request['content'], 'author_id' => Auth::user()->id, 'created_at' => now(), 'updated_at' => now()];
+    		$dbIns = [ 'status' => $request['status'], 'title' => $request['title'], 'content' => $request['content'], 'author_id' => Auth::user()->id, 'created_at' => now(), 'updated_at' => now(), 'tag_id' => $request['tag_id']];
     		DB::table('posts')->insert($dbIns);
                         if($request['status'] == 3){
                 return redirect('/')->with('notification', "Successfully saved draft.");
@@ -93,5 +93,23 @@ class BlogController extends Controller
     		return redirect('/')->with('notification', 'You are not allowed to create a new post');
     	}
 
+    }
+
+    public function adminEdit(){
+        if(Auth::check() && Auth::user()->id == 1 /* TODO Fix this so that it checks if allowed to post, not ID */){
+            $sidebarItems = DB::table('sidebar')->get();
+            return view('adminEditSidebar')->with('sidebarItems', $sidebarItems);
+        }
+        else{
+            return redirect('/')->with('notification', 'You are not allowed to view that page');
+        }
+
+    }
+
+    public function adminEditAjax(Request $request){
+        if($request->action == 'getSidebarInfo'){
+            $info = DB::table('sidebar')->whereNull('deleted_at')->orderBy('order', 'asc')->get();
+            return response()->json(['success'=>'Data received!', 'info' => $info]);
+        }
     }
 }

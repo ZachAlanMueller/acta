@@ -54,6 +54,8 @@
   <!-- Theme style  -->
   <link rel="stylesheet" href="/css/style.css">
 
+  <!-- DataList -->
+  <link href="/css/jquery.flexdatalist.css" rel="stylesheet" type="text/css">
 
    <link href="https://cdn.quilljs.com/1.3.5/quill.snow.css" rel="stylesheet">
 
@@ -123,6 +125,9 @@
   <script src="/js/alertify.js"></script>
   
   <script src="https://cdn.quilljs.com/1.3.5/quill.js"></script>
+
+  <!-- FlexDataList -->
+  <script src="/js/jquery.flexdatalist.js"></script>
 
   @yield('javascript')
   
