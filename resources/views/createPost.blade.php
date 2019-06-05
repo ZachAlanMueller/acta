@@ -7,7 +7,9 @@
         <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Create New Post</h2>
         <div class="animate-box" data-animate-effect="fadeInLeft">
           <div id="title">
-            <h1>Post Title</h1>
+            <h1>
+              
+            </h1>
           </div>
           <br>
           <!-- Create the toolbar container -->
@@ -16,7 +18,7 @@
 
           <!-- Create the editor container -->
           <div id="editor">
-            <p>Hello World!</p>
+            <p></p>
           </div>
         </div>
         <hr>
@@ -51,8 +53,10 @@
     $('#submit-button').val('Submit Post');
     var title = new Quill('#title', {
       modules: { toolbar: false },
-      theme: 'snow'
+      theme: 'snow',
+      placeholder: "Post Title"
     });
+    title.format('size': false);
     var toolbarOptions = [
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
       ['blockquote', 'code-block'],
@@ -70,7 +74,8 @@
     ];
     var editor = new Quill('#editor', {
       modules: { toolbar: toolbarOptions },
-      theme: 'snow'
+      theme: 'snow',
+      placeholder: 'Compose your epic...'
     });
 
     $.ajaxSetup({

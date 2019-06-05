@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -86,9 +85,8 @@
         <ul>
           <li id="selector-home" class="fh5co-active"><a href="/">Home</a></li>
           <li id="selector-posts" ><a href="/posts">Blog Posts</a></li>
-          <li id="selector-portfolio" ><a href="/portfolio">Portfolio</a></li>
-          <li id="selector-about" ><a href="/about">About</a></li>
-          <li id="selector-contact" ><a href="/contact">Contact</a></li>
+          <li id="selector-about" ><a href="http://zachalanmueller.com/about">About</a></li>
+          <li id="selector-contact" ><a href="http://zachalanmueller.com/contact">Contact</a></li>
         </ul>
       </nav>
 
